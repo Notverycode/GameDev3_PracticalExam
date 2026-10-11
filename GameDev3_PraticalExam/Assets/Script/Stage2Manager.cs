@@ -61,7 +61,7 @@ public class Stage2Manager : MonoBehaviour
         score += amount;
         UpdateUI();
 
-        if (score > targetScore)
+        if (score >= targetScore)
             WinGame();
     }
 

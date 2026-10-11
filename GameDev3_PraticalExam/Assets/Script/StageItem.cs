@@ -1,43 +1,62 @@
 
-
 using UnityEngine;
 
-public class Stage1Item : MonoBehaviour
+public class StageItem : MonoBehaviour
 {
     public ItemType itemType;
 
+    private bool collected = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (collected || !other.CompareTag("Player"))
             return;
 
-        Stage1Manager manager =
+        Stage1Manager manager1 =
             FindFirstObjectByType<Stage1Manager>();
 
-        if (manager == null)
-            return;
+        Stage2Manager manager2 =
+            FindFirstObjectByType<Stage2Manager>();
 
+        if (manager1 != null)
+        {
+            ApplyItem(manager1.AddTime, manager1.AddScore);
+        }
+        else if (manager2 != null)
+        {
+            ApplyItem(manager2.AddTime, manager2.AddScore);
+        }
+        else
+        {
+            Debug.LogError("No Stage1Manager or Stage2Manager found!");
+            return;
+        }
+
+        collected = true;
+        Destroy(gameObject);
+    }
+
+    private void ApplyItem(
+        System.Action<float> addTime,
+        System.Action<int> addScore)
+    {
         switch (itemType)
         {
             case ItemType.AddTime:
-                manager.AddTime(3);
+                addTime(3);
                 break;
 
             case ItemType.RemoveTime:
-                manager.AddTime(-5);
+                addTime(-5);
                 break;
 
             case ItemType.AddScore:
-                manager.AddScore(500);
+                addScore(500);
                 break;
 
             case ItemType.RemoveScore:
-                manager.AddScore(-500);
+                addScore(-500);
                 break;
         }
-
-        Destroy(gameObject);
     }
 }
-
-
