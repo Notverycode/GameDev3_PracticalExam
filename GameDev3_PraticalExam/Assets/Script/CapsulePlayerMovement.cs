@@ -20,7 +20,7 @@ public class CapsulePlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        runAction = playerInput.actions["Run"]; // must match your action name
+        runAction = playerInput.actions["Sprint"];
     }
 
     public void OnMove(InputValue value)
