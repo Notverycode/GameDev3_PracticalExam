@@ -15550,7 +15550,7 @@ MonoBehaviour:
   addScoreSound: {fileID: 8300000, guid: 191d7a6b39340af4ab03831857ffcef1, type: 3}
   removeScoreSound: {fileID: 8300000, guid: 965c7c0094aac5548ba57543df8f9e87, type: 3}
   jumpSound: {fileID: 8300000, guid: 3f8bad579a3623043884a4012511009a, type: 3}
-  winSound: {fileID: 0}
+  winSound: {fileID: 8300000, guid: a74fdce88a6308040b2f97b08cbc11bc, type: 3}
   loseSound: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 41744d42578a5264687b4db63ec7b64f, type: 2}
   player: {fileID: 1550044841}

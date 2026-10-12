@@ -93,6 +93,11 @@ public class Stage2Manager : MonoBehaviour
         gameEnded = true;
         finalScore = score;
 
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayWinSound();
+        }
+
         StartCoroutine(WinSequence());
     }
 
@@ -104,11 +109,6 @@ public class Stage2Manager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(danceDuration);
-
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PlayWinSound();
-        }
 
         SceneManager.LoadScene("Win");
     }
