@@ -28,13 +28,20 @@ public class CapsulePlayerMovement : MonoBehaviour
         moveInput = value.Get<Vector2>();
     }
 
+
     public void OnJump(InputValue value)
     {
         if (value.isPressed && controller.isGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayJumpSound();
+            }
         }
     }
+
 
     private void Update()
     {

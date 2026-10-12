@@ -109,7 +109,7 @@ public class Stage1Manager : MonoBehaviour
             return;
 
         gameEnded = true;
-        finalScore = score;
+        finalScore = score;       
 
         SaveCurrentStage();
 

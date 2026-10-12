@@ -16,6 +16,9 @@ public class Stage2Manager : MonoBehaviour
 
     private bool gameEnded = false;
 
+    public Animator playerAnimator;
+    public float danceDuration = 4f;
+
     private void Start()
     {
         UpdateUI();
@@ -81,6 +84,7 @@ public class Stage2Manager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+
     public void WinGame()
     {
         if (gameEnded)
@@ -89,8 +93,26 @@ public class Stage2Manager : MonoBehaviour
         gameEnded = true;
         finalScore = score;
 
+        StartCoroutine(WinSequence());
+    }
+
+    private System.Collections.IEnumerator WinSequence()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetTrigger("Dance");
+        }
+
+        yield return new WaitForSeconds(danceDuration);
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayWinSound();
+        }
+
         SceneManager.LoadScene("Win");
     }
+
 
     public void LoseGame()
     {
@@ -99,6 +121,11 @@ public class Stage2Manager : MonoBehaviour
 
         gameEnded = true;
         finalScore = score;
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayLoseSound();
+        }
 
         SaveCurrentStage();
 

@@ -8,6 +8,8 @@ public class GameoverUI : MonoBehaviour
 
     private void Start()
     {
+        PlayEndSound();
+
         string retryScene =
             PlayerPrefs.GetString("RetryScene", "Stage1");
 
@@ -25,6 +27,23 @@ public class GameoverUI : MonoBehaviour
         if (finalScoreText != null)
         {
             finalScoreText.text = "Score: " + finalScore;
+        }
+    }
+
+    private void PlayEndSound()
+    {
+        if (SoundManager.Instance == null)
+            return;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Win")
+        {
+            SoundManager.Instance.PlayWinSound();
+        }
+        else
+        {
+            SoundManager.Instance.PlayLoseSound();
         }
     }
 

@@ -33,6 +33,10 @@ public class StageItem : MonoBehaviour
         }
 
         collected = true;
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayItemSound(itemType);
+        }
         Destroy(gameObject);
     }
 

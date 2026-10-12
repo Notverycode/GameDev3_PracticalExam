@@ -109,6 +109,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        public event System.Action OnJumped;
 
         private bool IsCurrentDeviceMouse
         {
@@ -302,14 +303,15 @@ namespace StarterAssets
                 // Jump
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
-                    // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    _input.jump = false;
 
-                    // update animator if using character
                     if (_hasAnimator)
                     {
                         _animator.SetBool(_animIDJump, true);
                     }
+
+                    OnJumped?.Invoke();
                 }
 
                 // jump timeout
